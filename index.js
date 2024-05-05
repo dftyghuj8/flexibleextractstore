@@ -1,9 +1,10 @@
-function isSymmetric(root) {
-  if (!root) return true;
-  return isMirror(root.left, root.right);
-  function isMirror(left, right) {
-    if (!left && !right) return true;
-    if (!left || !right || left.val !== right.val) return false;
-    return isMirror(left.left, right.right) && isMirror(left.right, right.left);
+function hasCycle(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) return true;
   }
+  return false;
 }
