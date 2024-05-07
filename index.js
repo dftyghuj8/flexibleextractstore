@@ -1,16 +1,16 @@
-function longestConsecutive(nums) {
-  const set = new Set(nums);
-  let longest = 0;
-  for (const num of set) {
-    if (!set.has(num - 1)) {
-      let currentNum = num;
-      let currentStreak = 1;
-      while (set.has(currentNum + 1)) {
-        currentNum++;
-        currentStreak++;
-      }
-      longest = Math.max(longest, currentStreak);
+const quickSort = (arr) => {
+  if (arr.length <= 1) {
+    return arr;
+  }
+  const pivot = arr[arr.length - 1];
+  const left = [];
+  const right = [];
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
     }
   }
-  return longest;
-}
+  return quickSort(left).concat(pivot, quickSort(right));
+};
