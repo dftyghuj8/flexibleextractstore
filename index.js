@@ -1,11 +1,16 @@
-function binarySearch(arr, target) {
-  let low = 0;
-  let high = arr.length - 1;
-  while (low <= high) {
-    let mid = Math.floor((low + high) / 2);
-    if (arr[mid] === target) return mid;
-    if (arr[mid] < target) low = mid + 1;
-    else high = mid - 1;
+function minPathSum(grid) {
+  const rows = grid.length;
+  const cols = grid[0].length;
+  for (let i = 1; i < rows; i++) {
+    grid[i][0] += grid[i - 1][0];
   }
-  return -1;
+  for (let j = 1; j < cols; j++) {
+    grid[0][j] += grid[0][j - 1];
+  }
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < cols; j++) {
+      grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
+    }
+  }
+  return grid[rows - 1][cols - 1];
 }
